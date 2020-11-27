@@ -1,19 +1,16 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace blogAPI.Models
+namespace blogAPI.DTO
 {
-    public class BlogPost
+    public class BlogPostCreateDto
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         public string Title { get; set; }
-
+        
         [Required]
         public DateTime TimeCreated { get; set; }
-
+        
         [Required]
         public string Content { get; set; }
     }

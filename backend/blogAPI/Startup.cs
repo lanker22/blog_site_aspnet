@@ -1,3 +1,5 @@
+using System;
+using AutoMapper;
 using blogAPI.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +32,7 @@ namespace blogAPI
             });
 
             services.AddDbContextPool<BlogPostContext>(opt => opt.UseNpgsql("BlogPostConnection"));
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -41,3 +41,6 @@ C:\Users\George\Documents\blog_site\backend\blogAPI\obj\Debug\net5.0\blogAPI.dll
 C:\Users\George\Documents\blog_site\backend\blogAPI\obj\Debug\net5.0\ref\blogAPI.dll
 C:\Users\George\Documents\blog_site\backend\blogAPI\obj\Debug\net5.0\blogAPI.pdb
 C:\Users\George\Documents\blog_site\backend\blogAPI\obj\Debug\net5.0\blogAPI.genruntimeconfig.cache
+C:\Users\George\Documents\blog_site\backend\blogAPI\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\George\Documents\blog_site\backend\blogAPI\bin\Debug\net5.0\Humanizer.dll
+C:\Users\George\Documents\blog_site\backend\blogAPI\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll

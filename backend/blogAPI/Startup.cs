@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore.Design;
 
 
 namespace blogAPI
@@ -31,7 +32,9 @@ namespace blogAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "blogAPI", Version = "v1" });
             });
 
-            services.AddDbContextPool<BlogPostContext>(opt => opt.UseNpgsql("BlogPostConnection"));
+            services.AddDbContextPool<BlogPostContext>(opt => opt.UseNpgsql(
+                Configuration.GetConnectionString("BlogPostConnection")));
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 

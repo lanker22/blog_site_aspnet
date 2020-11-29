@@ -1,8 +1,10 @@
 using System;
 using AutoMapper;
 using blogAPI.Data;
+using blogAPI.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,8 +34,14 @@ namespace blogAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "blogAPI", Version = "v1" });
             });
 
-            services.AddDbContextPool<BlogPostContext>(opt => opt.UseNpgsql(
-                Configuration.GetConnectionString("BlogPostConnection")));
+            services.AddDbContextPool<BlogPostDbContext>(opt => opt.UseNpgsql(
+                Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContextPool<AppDbContext>(opt => opt.UseNpgsql(
+                Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
@@ -50,6 +58,8 @@ namespace blogAPI
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
+            
             app.UseRouting();
 
             app.UseAuthorization();

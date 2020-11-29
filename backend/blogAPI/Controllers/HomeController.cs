@@ -8,6 +8,7 @@ using blogAPI.Data;
 using blogAPI.DTO;
 using blogAPI.Models;
 using blogAPI.Profiles;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,18 +16,20 @@ using Microsoft.AspNetCore.Mvc;
 namespace blogAPI.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(Roles = "Administrator")]
     [ApiController]
-    public class BlogPostsController : ControllerBase
+    public class HomeController : ControllerBase
     {
-        private readonly BlogPostContext _context;
+        private readonly BlogPostDbContext _context;
         private readonly IMapper _mapper;
 
-        public BlogPostsController(BlogPostContext context, IMapper mapper)
+        public HomeController(BlogPostDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult<IEnumerable<BlogPostReadDto>> GetAllBlogPosts()
         {
@@ -34,6 +37,7 @@ namespace blogAPI.Controllers
             return Ok(_mapper.Map<IEnumerable<BlogPostReadDto>>(blogPostItems));
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}", Name = "Get")]
         public ActionResult<BlogPostReadDto> GetBlogPostById(int id)
         {
@@ -76,7 +80,8 @@ namespace blogAPI.Controllers
             _context.SaveChanges();
 
             var blogPostReadDto = _mapper.Map<BlogPostReadDto>(blogPostModel);
-            return CreatedAtRoute("Get", new {blogPostReadDto.Id}, blogPostReadDto);
+            return CreatedAtRoute("Get", new { blogPostReadDto.Id }, blogPostReadDto);
         }
     }
 }
+

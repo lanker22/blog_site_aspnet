@@ -9,7 +9,7 @@ using blogAPI.Data;
 
 namespace blogAPI.Migrations
 {
-    [DbContext(typeof(BlogPostContext))]
+    [DbContext(typeof(BlogPostDbContext))]
     [Migration("20201128113626_InitialCreate")]
     partial class InitialCreate
     {

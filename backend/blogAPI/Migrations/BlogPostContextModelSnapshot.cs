@@ -8,7 +8,7 @@ using blogAPI.Data;
 
 namespace blogAPI.Migrations
 {
-    [DbContext(typeof(BlogPostContext))]
+    [DbContext(typeof(BlogPostDbContext))]
     partial class BlogPostContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

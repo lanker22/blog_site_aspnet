@@ -3,14 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace blogAPI.Data
 {
-    public class BlogPostContext : DbContext
+    public class BlogPostDbContext : DbContext
     {
-        public BlogPostContext(DbContextOptions<BlogPostContext> options)
+        public BlogPostDbContext(DbContextOptions<BlogPostDbContext> options)
             : base(options)
         {
             
         }
-
         public DbSet<BlogPost> BlogPosts { get; set; }
     }
 }

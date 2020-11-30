@@ -8,16 +8,11 @@ namespace blogAPI.DTO
 {
     public class UserLoginDto
     {
-        [Required(ErrorMessage = "Username is required")]
+        [Required]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Password is required")]
+        [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-
-        [Required(ErrorMessage = "Confirm password required")]
-        [DataType(DataType.Password)]
-        [Compare("Password")]
-        public string ConfirmPassword { get; set; }
     }
 }

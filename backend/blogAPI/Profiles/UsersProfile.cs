@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using blogAPI.DTO;
+using Microsoft.AspNetCore.Identity;
 
 namespace blogAPI.Profiles
 {
@@ -10,6 +12,7 @@ namespace blogAPI.Profiles
     {
         public UsersProfile()
         {
+            CreateMap<UserLoginDto, IdentityUser>();
         }
     }
 }

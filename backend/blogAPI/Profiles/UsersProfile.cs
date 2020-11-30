@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace blogAPI.Profiles
 {
-    public class UsersProfile
+    public class UsersProfile : Profile
     {
+        public UsersProfile()
+        {
+        }
     }
 }

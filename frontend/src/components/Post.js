@@ -1,6 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-var Post = (props) => {
+var Post = () => {
+
+    const [blogPost, setBlogPost] = useState([]);
+
+    const { id } = useParams();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const url = `http://localhost:5000/api/${id}`;
+            const response = await fetch(url);
+            console.log(response);
+            const data = await response.json();
+            setBlogPost(data);
+        }
+        fetchData();
+    }, [])
+    
     return (
     <div>
     <header className="masthead" style={{backgroundImage: "url('img/post-bg.jpg')"}}>
@@ -9,8 +26,8 @@ var Post = (props) => {
       <div className="row">
         <div className="col-lg-8 col-md-10 mx-auto">
           <div className="post-heading">
-            <h1>{props.Title}</h1>
-            <span className="meta">{props.Posted}</span>
+            <h1>{blogPost.title}</h1>
+            <span className="meta">{blogPost.content}</span>
           </div>
         </div>
       </div>
@@ -20,7 +37,7 @@ var Post = (props) => {
     <div className="container">
       <div className="row">
         <div className="col-lg-8 col-md-10 mx-auto">
-        {props.Content}
+        {blogPost.timeCreated}
         </div>
       </div>
     </div>
@@ -28,3 +45,5 @@ var Post = (props) => {
   </div>
     );
 }
+
+export default Post;

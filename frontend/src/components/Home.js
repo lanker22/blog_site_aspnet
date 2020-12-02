@@ -1,27 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PostPreview from "./PostPreview";
 
-
 var Home = () => {
+
+    const [blogPosts, setBlogPosts] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const url = "http://localhost:5000/api/";
+            const response = await fetch(url);
+            const data = await response.json();
+            setBlogPosts(data);
+        }
+        fetchData();
+    }, [])
+
     return (
     <div>
-    <header className="masthead" style={{backgroundImage: "url('/home-bg.jpg')"}}>
-    <div className="overlay"></div>
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-8 col-md-10 mx-auto">
-          <div className="site-heading">
-            <h1>George's Blog</h1>
-            <span className="subheading">A Blog By George in C#</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
     <div className="container">
     <div className="row">
     <div className="col-lg-8 col-md-10 mx-auto">
-
+        {blogPosts.map((blog) => (
+            <PostPreview 
+                key={blog.id} 
+                keyId={blog.id} 
+                Posted={blog.timeCreated} 
+                Title={blog.title} 
+                Content={blog.content} 
+            />
+        ))}
     </div>
     </div>
     </div>

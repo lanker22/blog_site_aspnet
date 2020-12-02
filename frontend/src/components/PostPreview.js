@@ -1,15 +1,21 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 var PostPreview = (props) => {
+
+    // format the DateTime string received from API to "DD/MM/YYYY"
+    var posted = new Date(props.Posted);
+    posted = new Intl.DateTimeFormat().format(posted);
+
     return (
     <div>
         <div className="post-preview">
-          <a href="post.html">
-            <h2 className="post-title">
+          <Link to={`/post/${props.keyId}`}>
+          <h2 className="post-title">
               {props.Title}
             </h2>
-          </a>
-        <p className="post-meta">Posted on {props.Posted}</p>
+          </Link>
+        <p className="post-meta">Posted on {posted}</p>
         </div>
         <hr/>
     </div>

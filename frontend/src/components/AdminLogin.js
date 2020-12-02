@@ -1,6 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 var AdminLogin = () => {
+
+    const [errors, setErrors] = useState([]);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        UserName: username,
+        Password: password
+       })
+    };
+
+    const handleSubmit = (e) => {
+      console.log(username, password);
+      e.preventDefault();
+      fetch('http://localhost:5000/api/admin/login', requestOptions)
+      .then(response => response.json())
+      .then(data => console.log(data));
+    }
+
     return (
     <div className="container">
     <div className="row">
@@ -8,16 +30,28 @@ var AdminLogin = () => {
         <div className="card card-signin my-5">
           <div className="card-body">
             <h5 className="card-title text-center">Administrator Sign In</h5>
-            <form className="form-signin">
+            <form className="form-signin" onSubmit={handleSubmit}>
               <div className="form-label-group">
-                <input type="text" id="inputUserName" class="form-control" placeholder="User Name" required autofocus />
-                <label for="inputUserName">User Name</label>
+                <input type="text" 
+                      id="inputUserName" 
+                      className="form-control" 
+                      placeholder="User Name" 
+                      value = {username}
+                      onChange = {e => setUsername(e.target.value)}
+                      required autoFocus />
+                <label htmlFor="inputUserName">User Name</label>
               </div>
-
               <div className="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required />
-                <label for="inputPassword">Password</label>
+                <input type="password" 
+                       id="inputPassword" 
+                       className="form-control" 
+                       placeholder="Password" 
+                       value = {password}
+                       onChange = {e => setPassword(e.target.value)}
+                       required />
+                <label htmlFor="inputPassword">Password</label>
               </div>
+              <button type="submit" className="btn btn-primary">Log In</button>
             </form>
           </div>
         </div>

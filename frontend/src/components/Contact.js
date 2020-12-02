@@ -1,7 +1,9 @@
 import React from 'react';
 
 var Contact = () => {
-    return ("placeholder");
+    return (
+        "contact"
+    );
 }
 
 export default Contact;

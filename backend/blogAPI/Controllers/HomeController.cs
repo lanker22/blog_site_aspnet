@@ -7,15 +7,13 @@ using AutoMapper;
 using blogAPI.Data;
 using blogAPI.DTO;
 using blogAPI.Models;
-using blogAPI.Profiles;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace blogAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [Authorize(Roles = "Administrator")]
     [ApiController]
     public class HomeController : ControllerBase
@@ -34,7 +32,9 @@ namespace blogAPI.Controllers
         public ActionResult<IEnumerable<BlogPostReadDto>> GetAllBlogPosts()
         {
             var blogPostItems = _context.BlogPosts.ToList();
-            return Ok(_mapper.Map<IEnumerable<BlogPostReadDto>>(blogPostItems));
+            var blogPostDtoItems = _mapper.Map<IEnumerable<BlogPostReadDto>>(blogPostItems)
+                .OrderByDescending(x => x.TimeCreated);
+            return Ok(blogPostDtoItems);
         }
 
         [AllowAnonymous]

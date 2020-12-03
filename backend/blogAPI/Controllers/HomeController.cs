@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace blogAPI.Controllers
 {
     [Route("api/")]
-    [Authorize(Roles = "Administrator")]
     [ApiController]
     public class HomeController : ControllerBase
     {
@@ -27,7 +26,6 @@ namespace blogAPI.Controllers
             _mapper = mapper;
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public ActionResult<IEnumerable<BlogPostReadDto>> GetAllBlogPosts()
         {
@@ -37,7 +35,6 @@ namespace blogAPI.Controllers
             return Ok(blogPostDtoItems);
         }
 
-        [AllowAnonymous]
         [HttpGet("{id}", Name = "Get")]
         public ActionResult<BlogPostReadDto> GetBlogPostById(int id)
         {
@@ -48,39 +45,6 @@ namespace blogAPI.Controllers
             }
 
             return Ok(_mapper.Map<BlogPostReadDto>(blogPost));
-        }
-
-        [Route("delete/{id}")]
-        [HttpDelete]
-        public ActionResult DeleteBlogPost(int id)
-        {
-            var blogPostToDelete = _context.BlogPosts.Find(id);
-            if (blogPostToDelete == null)
-            {
-                throw new ArgumentNullException(nameof(blogPostToDelete));
-            }
-
-            _context.BlogPosts.Remove(blogPostToDelete);
-            _context.SaveChanges();
-
-            return NoContent();
-        }
-
-        [Route("new")]
-        [HttpPost]
-        public ActionResult<BlogPostReadDto> CreateBlogPost(BlogPostCreateDto blogPostCreateDto)
-        {
-            var blogPostModel = _mapper.Map<BlogPost>(blogPostCreateDto);
-            if (blogPostModel == null)
-            {
-                throw new ArgumentNullException(nameof(blogPostModel));
-            }
-            _context.BlogPosts.Add(blogPostModel);
-
-            _context.SaveChanges();
-
-            var blogPostReadDto = _mapper.Map<BlogPostReadDto>(blogPostModel);
-            return CreatedAtRoute("Get", new { blogPostReadDto.Id }, blogPostReadDto);
         }
     }
 }

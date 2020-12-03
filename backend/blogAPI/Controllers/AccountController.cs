@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Identity;
 namespace blogAPI.Controllers
 {
     [ApiController]
-    [Route("api/admin")]
+    [Route("api/")]
     public class AccountController : Controller
     {
         private readonly SignInManager<IdentityUser> _loginManager;
@@ -33,10 +33,10 @@ namespace blogAPI.Controllers
             
             if (result.Succeeded)
             {
-                return Ok();
+                return Json(result);
             }
             ModelState.AddModelError(string.Empty, "Invalid login attempt");
-            return ValidationProblem();
+            return Unauthorized();
         }
 
         [HttpGet]

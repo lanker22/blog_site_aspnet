@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
 
 var AdminLogin = () => {
 
     const [errors, setErrors] = useState([]);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const history = useHistory();
 
     const requestOptions = {
       method: 'POST',
@@ -12,15 +14,18 @@ var AdminLogin = () => {
       body: JSON.stringify({ 
         UserName: username,
         Password: password
-       })
-    };
+       }),
+       credentials: 'include'
+    }
 
-    const handleSubmit = (e) => {
-      console.log(username, password);
+    const handleSubmit = async (e) => {
       e.preventDefault();
-      fetch('http://localhost:5000/api/admin/login', requestOptions)
-      .then(response => response.json())
-      .then(data => console.log(data));
+      const response = await fetch('http://localhost:5000/api/login', requestOptions)
+      const data = await response.json();
+      console.log(data);
+      if(data.errors) {
+        setErrors(data.errors[""][0])
+      }
     }
 
     return (
@@ -30,6 +35,7 @@ var AdminLogin = () => {
         <div className="card card-signin my-5">
           <div className="card-body">
             <h5 className="card-title text-center">Administrator Sign In</h5>
+            <p>{errors}</p>
             <form className="form-signin" onSubmit={handleSubmit}>
               <div className="form-label-group">
                 <input type="text" 

@@ -1,11 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route } from "react-router-dom";
+import AdminNavBar from "./AdminNavBar";
 
 var AdminRoute = ({ component: Component, ...rest }) => {
     return (
         <Route 
             {...rest}
-            component={(props) => (<Component {...props} />)}
+            component={(props) => (
+            <div>
+                <AdminNavBar /> 
+                <Component {...props} />
+                </div>
+                )}
         />
     );
 }

@@ -1,7 +1,17 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 var AdminNavBar = () => {
+    
+    const history = useHistory();
+    
+    const logOut = async() => {
+        await fetch("http://localhost:5000/api/logout");
+        history.push("/login");
+    }
+    
     return (
+    <div>
     <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div className="container">
         <a className="navbar-brand" href="index.html">Admin</a>
@@ -15,12 +25,26 @@ var AdminNavBar = () => {
                 <a className="nav-link" href="contact.html">Create Post</a>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="contact.html">Logout</a>
+                <a href="" className="nav-link" onClick={logOut}>Logout</a>
             </li>
             </ul>
         </div>
         </div>
     </nav>
+    <header className="masthead" style={{backgroundImage: "url('/home-bg.jpg')"}}>
+    <div className="overlay"></div>
+    <div className="container">
+      <div className="row">
+        <div className="col-lg-8 col-md-10 mx-auto">
+          <div className="site-heading">
+            <h1>George's Blog</h1>
+            <span className="subheading">A Blog By George in C#</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  </div>
     );
 }
 

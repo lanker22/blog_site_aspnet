@@ -7,6 +7,7 @@ import PublicRoute from "../src/components/PublicRoute";
 import AdminRoute from "../src/components/AdminRoute";
 import Post from "../src/components/Post";
 import { Switch, BrowserRouter } from "react-router-dom";
+import AdminHome from './components/AdminHome';
 
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
             <PublicRoute exact path="/about" component={About} />
             <PublicRoute exact path="/contact" component={Contact} />
             <PublicRoute path="/post/:id" component={Post} />
-            <AdminRoute exact path="/admin/login" component={AdminLogin} />
+            <PublicRoute exact path="/login" component={AdminLogin} />
+            <AdminRoute exact path="/admin/home" component={AdminHome} />
           </Switch>
         </BrowserRouter>
       </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 var AdminNavBar = () => {
     
@@ -22,7 +22,9 @@ var AdminNavBar = () => {
         <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-                <a className="nav-link" href="contact.html">Create Post</a>
+                <Link to="/admin/new" className="nav-link">
+                  Create Post
+                </Link>
             </li>
             <li className="nav-item">
                 <a href="" className="nav-link" onClick={logOut}>Logout</a>

@@ -2,6 +2,7 @@ import React from 'react';
 
 var AdminPostPreview = (props) => {
 
+    // format the "timeCreated" datetime object for display on the site
     var posted = new Date(props.Posted);
     posted = new Intl.DateTimeFormat().format(posted);
     

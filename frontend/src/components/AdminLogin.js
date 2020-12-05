@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
 
 var AdminLogin = () => {
 
     const [errors, setErrors] = useState([]);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const history = useHistory();
 
     const requestOptions = {
       method: 'POST',

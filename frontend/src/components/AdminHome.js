@@ -5,8 +5,10 @@ var AdminHome = () => {
     
     const [blogPosts, setBlogPosts] = useState([]);
 
+    // boolean which triggers useEffect every time a post is deleted
     const [wasBlogDeleted, setWasBlogDeleted] = useState(false);
 
+    // passed down to individual blog posts as a prop enabling that blog to be deleted
     const deletePost = useCallback(async (blogId) => {
        await fetch(`http://localhost:5000/api/admin/delete/${blogId}`,
        {
@@ -18,6 +20,7 @@ var AdminHome = () => {
        setWasBlogDeleted(true)
     }, [])
 
+    // fetch all blog posts from API every time a post is deleted or page is loaded/refreshed
     useEffect(() => {
         const fetchData = async () => {
             const url = "http://localhost:5000/api/admin/";

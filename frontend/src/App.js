@@ -8,6 +8,7 @@ import AdminRoute from "../src/components/AdminRoute";
 import Post from "../src/components/Post";
 import { Switch, BrowserRouter } from "react-router-dom";
 import AdminHome from './components/AdminHome';
+import NewPost from "./components/NewPost";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <PublicRoute path="/post/:id" component={Post} />
             <PublicRoute exact path="/login" component={AdminLogin} />
             <AdminRoute exact path="/admin/home" component={AdminHome} />
+            <AdminRoute exact path = "/admin/new" component={NewPost} />
           </Switch>
         </BrowserRouter>
       </div>

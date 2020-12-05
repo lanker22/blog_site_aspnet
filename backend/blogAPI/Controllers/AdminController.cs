@@ -13,7 +13,8 @@ namespace blogAPI.Controllers
 {
    // [Authorize(Roles="Administrator")]
     [Route("/api/admin/")]
-    public class AdminController : Controller
+    [ApiController]
+    public class AdminController : ControllerBase
     {
         private readonly BlogPostDbContext _context;
         private readonly IMapper _mapper;

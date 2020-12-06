@@ -16,7 +16,7 @@ var Post = () => {
             setBlogPost(data);
         }
         fetchData();
-    }, [])
+    })
     
     return (
     <div>

@@ -1,28 +1,38 @@
 import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
 
 var AdminLogin = () => {
 
-    const [errors, setErrors] = useState([]);
+    const history = useHistory();
+    const [error, setError] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({ 
         UserName: username,
         Password: password
        }),
-       credentials: 'include'
+       credentials:"include",
     }
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      const response = await fetch('http://localhost:5000/api/login', requestOptions)
-      const data = await response.json();
-      console.log(data);
-      if(data.errors) {
-        setErrors(data.errors[""][0])
+      try {
+        const response = await fetch('http://localhost:5000/api/login', requestOptions)
+        if(response.status !== 200) {
+          const data = await response.json();
+          var loginErrorMessage = data.error[0]
+          throw new Error(loginErrorMessage)
+        } else {
+          history.push("/admin/home")  
+        }
+      } catch(err) {
+        setError(err.message);
       }
     }
 
@@ -33,7 +43,7 @@ var AdminLogin = () => {
         <div className="card card-signin my-5">
           <div className="card-body">
             <h5 className="card-title text-center">Administrator Sign In</h5>
-            <p>{errors}</p>
+            <p>{error}</p>
             <form className="form-signin" onSubmit={handleSubmit}>
               <div className="form-label-group">
                 <input type="text" 

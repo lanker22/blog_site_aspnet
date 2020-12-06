@@ -10,7 +10,7 @@ var PostPreview = (props) => {
     return (
     <div>
         <div className="post-preview">
-          <Link to={`/post/${props.keyId}`}>
+          <Link to={`post/${props.keyId}`}>
           <h2 className="post-title">
               {props.Title}
             </h2>

@@ -4,12 +4,18 @@ import { useHistory, Link } from 'react-router-dom';
 var AdminNavBar = () => {
     
     const history = useHistory();
-    
-    const logOut = async() => {
-        await fetch("http://localhost:5000/api/logout");
-        history.push("/login");
+
+    const requestOptions = {
+      method: 'GET',
+      credentials:"include"
     }
     
+    const logOut = async(e) => {
+        e.preventDefault();
+        await fetch("http://localhost:5000/api/logout", requestOptions);
+        history.replace("/login");
+    }
+
     return (
     <div>
     <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -48,6 +54,6 @@ var AdminNavBar = () => {
   </header>
   </div>
     );
-}
+};
 
 export default AdminNavBar;

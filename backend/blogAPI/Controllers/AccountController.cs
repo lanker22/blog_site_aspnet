@@ -1,18 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using blogAPI.DTO;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace blogAPI.Controllers
 {
     [ApiController]
     [Route("api/")]
-    public class AccountController : Controller
+    public class AccountController : ControllerBase
     {
         private readonly SignInManager<IdentityUser> _loginManager;
 
@@ -33,10 +31,10 @@ namespace blogAPI.Controllers
             
             if (result.Succeeded)
             {
-                return Json(result);
+                return Ok();
             }
-            ModelState.AddModelError(string.Empty, "Invalid login attempt");
-            return Unauthorized();
+            ModelState.AddModelError("error", result.ToString());
+            return BadRequest(ModelState);
         }
 
         [HttpGet]
@@ -50,8 +48,8 @@ namespace blogAPI.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, ex.Message);
-                return BadRequest();
+                ModelState.AddModelError("error", ex.Message);
+                return BadRequest(ModelState);
             }
         }
     }

@@ -34,7 +34,7 @@ namespace blogAPI.Controllers
             return Ok(blogPostDtoItems);
         }
 
-        [HttpGet("view/{id}")]
+        [HttpGet("{id}")]
         public ActionResult<BlogPostReadDto> GetBlogPostById(int id)
         {
             var blogPost = _context.BlogPosts.Find(id);
@@ -77,6 +77,22 @@ namespace blogAPI.Controllers
 
             var blogPostReadDto = _mapper.Map<BlogPostReadDto>(blogPostModel);
             return CreatedAtRoute("Get", new { blogPostReadDto.Id }, blogPostReadDto);
+        }
+
+        [Route("editpost/{id}")]
+        [HttpPatch]
+        public ActionResult<BlogPostUpdateDto> UpdateBlogPost(int id, BlogPostUpdateDto blogPostUpdateDto)
+        {
+            var blogPostToUpdate = _context.BlogPosts.Find(id);
+            if (blogPostToUpdate == null)
+            {
+                throw new ArgumentNullException(nameof(blogPostToUpdate));
+            }
+
+            _mapper.Map(blogPostUpdateDto, blogPostToUpdate);
+            _context.BlogPosts.Update(blogPostToUpdate);
+            _context.SaveChanges();
+            return NoContent();
         }
 
     }

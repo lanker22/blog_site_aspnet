@@ -1,4 +1,3 @@
-import { render } from '@testing-library/react';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ErrorPage from './ErrorPage';
@@ -25,9 +24,9 @@ var Post = () => {
         fetchData();
     })
     
-    if(didThrowError == true) {
+    if(didThrowError === true) {
       return (
-        <ErrorPage></ErrorPage>
+        <ErrorPage />
       )
     } else {
       return (

@@ -16,6 +16,7 @@ var AdminHome = () => {
            headers: {
                "Content-Type":"application/json"
         },
+        credentials: "include"
        })
        setWasBlogDeleted(true)
     }, [])
@@ -23,12 +24,11 @@ var AdminHome = () => {
     // fetch all blog posts from API every time a post is deleted or page is loaded/refreshed
     useEffect(() => {
         const fetchData = async () => {
-            const url = "http://localhost:5000/api/admin/";
-            const response = await fetch(url);
-            console.log(response);
+            const url = "https://localhost:5001/api/admin/";
+            const response = await fetch(url, {credentials: "include"});
             const data = await response.json();
-            setBlogPosts(data);
-        }
+            setBlogPosts(data);        
+        }   
         fetchData();
         setWasBlogDeleted(false);
     }, [wasBlogDeleted])

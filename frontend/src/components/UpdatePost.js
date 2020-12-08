@@ -17,14 +17,15 @@ var UpdatePost = () => {
         body: JSON.stringify({ 
           Id: id,
           Title: blogTitle,
-          Content: blogContent,
+          Content: blogContent
          }),
+         credentials: "include",
       }
 
     useEffect(() => {
         const fetchData = async () => {
             const url = `http://localhost:5000/api/admin/${id}`;
-            const response = await fetch(url);
+            const response = await fetch(url, {credentials: "include"});
             const data = await response.json();
             setBlogTitle(data.title);
             setBlogContent(data.content);

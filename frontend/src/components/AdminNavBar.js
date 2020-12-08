@@ -7,7 +7,7 @@ var AdminNavBar = () => {
 
     const requestOptions = {
       method: 'GET',
-      credentials:"include"
+      credentials: "include"
     }
     
     const logOut = async(e) => {

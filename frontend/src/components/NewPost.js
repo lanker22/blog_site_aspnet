@@ -17,6 +17,7 @@ var NewPost = () => {
           Content: blogContent,
           TimeCreated: new Date().toISOString()
          }),
+         credentials: "include"
       }
     
     const addNewPost = async (e) => {

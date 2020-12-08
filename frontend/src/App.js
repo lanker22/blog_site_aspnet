@@ -6,10 +6,11 @@ import AdminLogin from "../src/components/AdminLogin";
 import PublicRoute from "../src/components/PublicRoute";
 import AdminRoute from "../src/components/AdminRoute";
 import Post from "../src/components/Post";
-import { Switch, BrowserRouter } from "react-router-dom";
+import { Switch, BrowserRouter, Route } from "react-router-dom";
 import AdminHome from './components/AdminHome';
 import NewPost from "./components/NewPost";
 import UpdatePost from './components/UpdatePost';
+import ErrorPage from './components/ErrorPage';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <AdminRoute exact path="/admin/home" component={AdminHome} />
             <AdminRoute exact path = "/admin/new" component={NewPost} />
             <AdminRoute exact path = "/admin/editpost/:id" component={UpdatePost} />
+            <Route component={ErrorPage} />
           </Switch>
         </BrowserRouter>
       </div>

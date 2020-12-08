@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace blogAPI.Controllers
 {
-   // [Authorize(Roles="Administrator")]
+    [Authorize(Roles="Administrator")]
     [Route("/api/admin/")]
     [ApiController]
     public class AdminController : ControllerBase

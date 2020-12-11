@@ -38,7 +38,7 @@ var Post = () => {
             <div className="col-lg-8 col-md-10 mx-auto">
               <div className="post-heading">
                 <h1>{blogPost.title}</h1>
-                <span className="meta">{blogPost.content}</span>
+                <div dangerouslySetInnerHTML={{__html: blogPost.content}}></div>
               </div>
             </div>
           </div>

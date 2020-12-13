@@ -23,7 +23,7 @@ var NewPost = () => {
     const addNewPost = async (e) => {
         e.preventDefault();
         try {
-            await fetch("http://localhost:5000/api/admin/new", requestOptions);
+            await fetch("http://localhost:8080/api/admin/new", requestOptions);
             history.push("/admin/home");
         } catch(err) {
             console.log(err)

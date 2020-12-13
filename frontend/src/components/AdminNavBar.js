@@ -12,7 +12,7 @@ var AdminNavBar = () => {
     
     const logOut = async(e) => {
         e.preventDefault();
-        await fetch("http://localhost:5000/api/logout", requestOptions);
+        await fetch("http://localhost:8080/api/logout", requestOptions);
         history.replace("/login");
     }
 

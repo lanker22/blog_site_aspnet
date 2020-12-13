@@ -13,7 +13,7 @@ var Post = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const url = `http://localhost:5000/api/${id}`;
+            const url = `http://localhost:8080/api/${id}`;
             const response = await fetch(url);
             const data = await response.json();
             setBlogPost(data);

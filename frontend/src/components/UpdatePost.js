@@ -24,7 +24,7 @@ var UpdatePost = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const url = `http://localhost:5000/api/admin/${id}`;
+            const url = `http://localhost:8080/api/admin/${id}`;
             const response = await fetch(url, {credentials: "include"});
             const data = await response.json();
             setBlogTitle(data.title);
@@ -36,7 +36,7 @@ var UpdatePost = () => {
     const updatePost = async (e) => {
         e.preventDefault();
         try {
-            await fetch(`http://localhost:5000/api/admin/editpost/${id}`, requestOptions);    
+            await fetch(`http://localhost:8080/api/admin/editpost/${id}`, requestOptions);    
         } catch(err) {
             console.log(err);
         }

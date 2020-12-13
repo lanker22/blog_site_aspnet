@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  blog-api:
+    image: gjeblog.azurecr.io/blogapi:latest
+    container_name: blog-api
+    build: ./backend/blogAPI
+    ports:
+      - "8080:80"
+    environment:
+      - DB_CONN=${DB_CONN}
+    networks:
+      - blog-network
+
+  blog-frontend:
+    image: gjeblog.azurecr.io/blogfrontend:latest
+    container_name: blog-frontend
+    build: ./frontend/
+    ports:
+      - "3000:3000"
+    networks:
+      - blog-network
+    
+networks:
+  blog-network:
+    name: blog-network
+
+  

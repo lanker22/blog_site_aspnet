@@ -10,7 +10,7 @@ var AdminHome = () => {
 
     // passed down to individual blog posts as a prop enabling that blog to be deleted
     const deletePost = useCallback(async (blogId) => {
-       await fetch(`http://localhost:5000/api/admin/delete/${blogId}`,
+       await fetch(`http://localhost:8080/api/admin/delete/${blogId}`,
        {
            method:"DELETE",
            headers: {
@@ -24,7 +24,7 @@ var AdminHome = () => {
     // fetch all blog posts from API every time a post is deleted or page is loaded/refreshed
     useEffect(() => {
         const fetchData = async () => {
-            const url = "https://localhost:5001/api/admin/";
+            const url = "http://localhost:8080/api/admin/";
             const response = await fetch(url, {credentials: "include"});
             const data = await response.json();
             setBlogPosts(data);        

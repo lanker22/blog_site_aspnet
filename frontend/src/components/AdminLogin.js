@@ -23,7 +23,7 @@ var AdminLogin = () => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        const response = await fetch('https://localhost:5001/api/login', requestOptions)
+        const response = await fetch('http://localhost:8080/api/login', requestOptions)
         if(response.status !== 200) {
           const data = await response.json();
           var loginErrorMessage = data.error[0]
